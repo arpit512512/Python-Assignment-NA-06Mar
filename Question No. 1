@@ -33,28 +33,29 @@ class LPsolver():
                 self.mark_coordinate(B[i][0],B[i][1],A[i],B[j][0],B[j][1],A[j],str(unichr(k)))
                 k+=1
         
-    def line_create(self,a,b,c):
+
+    def line_create(self,a,b,c):        
         r = lambda: random.randint(0,255)
-        colr='#%02X%02X%02X' % (r(),r(),r())
+        colr1='#%02X%02X%02X' % (r(),r(),r())
+        colr2='#%02X%02X%02X' % (r(),r(),r())
         b=float(b)
         a=float(a)
         c=float(c)
         if b!=0:
             t=np.arange(-2,30,0.1)
             y=lambda t:(c-a*t)/b
-            plt.fill_between(t,y(t),alpha=0.5,color=colr)
-            plt.plot(t,y(t),color=colr)
+            plt.fill_between(t,y(t),alpha=0.5,color=colr1)
+            plt.plot(t,y(t),color=colr2)
         else:
             y=np.arange(-2,30,0.1)
             t=[(c/a)]*(y.size)
-            plt.plot(t,y,color=colr)
+            plt.plot(t,y,color=colr2)
            
             t=np.arange(0,c/a,0.1)
             y=[30]*t.size
-            plt.fill_between(t,y,alpha=0.5,color=colr)
+            plt.fill_between(t,y,alpha=0.5,color=colr1)
 
-        
-        
+      
 
     def solve(self,x,y,z):
         self.coordinate_marker(z,y)
@@ -108,9 +109,9 @@ class LPsolver():
         a=map(int,a)
 
         a.append(sum([a[i]*x[i] for i in range(lx)]))
-        s="("+str(a[0])+","+str(a[1])+")"
-        plt.annotate(s,xy=(a[0],a[1]),xytext=(a[0],a[1]+0.1))
-        plt.annotate("soln",xy=(a[0],a[1]),xytext=(a[0]+1,a[1]+0.5))
+##        s="("+str(a[0])+","+str(a[1])+")"
+        s="Max Z = "+str(x[0]*a[0]+x[1]*a[1])
+        plt.annotate(s,xy=(a[0]+0.1,a[1]+0.1),xytext=(a[0]+1,a[1]+0.5),arrowprops=dict(facecolor='black', shrink=0.05))
         plt.annotate("Simplex method",xy=(15,10),xytext=(11,9))
         plt.ylim(0,10)
         plt.xlim(0,15)
