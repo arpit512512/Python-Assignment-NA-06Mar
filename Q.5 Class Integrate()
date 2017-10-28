@@ -9,7 +9,7 @@ class Integrate():
             #b is the upper limit of integration
             #n is the number of divisions and more the number of divisions,more is the accuracy
             #fn is the function whose integration has to be done
-            #method : 1.Trapezoidal Rule 2.Simpsons Rule
+            #method : 1 Trapezoidal Rule 2 Simpsons Rule
             #input : a,b,n,fn
 
             def line_create(self,a,b,c):
